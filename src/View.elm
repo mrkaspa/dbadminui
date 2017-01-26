@@ -3,4 +3,4 @@ module View exposing (view)
 import Html exposing (text)
 
 view: Html.Html msg
-view = text "imported text"
+view = text "imported text from another module"
