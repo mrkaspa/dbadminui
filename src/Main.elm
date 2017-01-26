@@ -23,7 +23,7 @@ main =
 -- MODEL
 
 
-type alias Model = 
+type alias Model =
   { count : Int
   , swapCount: Int -- this will be updated by elm-hot callback. See index.js
   , elapsed : Int

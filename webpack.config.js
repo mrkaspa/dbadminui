@@ -34,7 +34,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist'], {
       root: __dirname,
-      verbose: true, 
+      verbose: true,
       dry: false
     }),
     new CopyWebpackPlugin([

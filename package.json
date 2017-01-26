@@ -1,15 +1,51 @@
 {
-  "name": "elm-hot-loader-starter",
+  "name": "HackminDB",
   "private": true,
   "version": "3.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "webpack-dev-server --hot --inline --port 3000",
-    "build": "webpack"
-  },
+  "description": "Hackmin administrator",
+  "main": "main.js",
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "dev": "webpack-dev-server --hot --inline --port 3000 & electron main.js",
+    "build": "webpack",
+    "prepackage": "cross-env NODE_ENV=production webpack",
+    "package": "npm run prepackage && build --dir",
+    "build": "npm run prepackage && build --x64",
+    "build-mac": "npm run prepackage && build --mac --x64",
+    "build-win": "npm run prepackage && build --win --x64",
+    "build-linux": "npm run prepackage && build --linux --x64",
+    "archive-builds": "tar -zcf builds.tar.gz dist/"
+  },
+  "build": {
+    "appId": "org.xwvvvvwx.typescript-boilerplate",
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ]
+    },
+    "win": {
+      "target": [
+        "squirrel"
+      ]
+    }
+  },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.8",
     "copy-webpack-plugin": "^1.1.1",
@@ -18,6 +54,11 @@
     "file-loader": "^0.8.5",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.12",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "cross-env": "^2.0.0",
+    "electron-prebuilt": "^1.2.0",
+    "electron-builder": "^7.13.0",
+    "electron-debug": "^1.0.1",
+    "electron-devtools-installer": "^2.0.1"
   }
 }
