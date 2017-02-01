@@ -4,7 +4,12 @@ import Html exposing (program, div)
 import Html.Attributes exposing (..)
 import Main.ListView exposing (renderList)
 import Main.HeaderView exposing (renderHeader)
-import Main.Types exposing (Conn, Msg(..))
+import Main.ConnForm exposing (initConnForm, validation)
+import Main.Types exposing (Conn, ConnForm, Msg(..), Model, connToForm, formToConn)
+import Main.CommonStyles exposing (bgColor)
+import Form exposing (Form)
+import Form.Validate as Validate
+import Form.Input as Input
 
 
 main : Program Never Model Msg
@@ -21,14 +26,9 @@ main =
 -- MODEL
 
 
-type alias Model =
-    { conns : List Conn
-    }
-
-
 init : ( Model, Cmd Msg )
 init =
-    ( Model [ Conn 1 "demo" ], Cmd.none )
+    ( Model [], Cmd.none )
 
 
 
@@ -36,13 +36,52 @@ init =
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update msg ({ conns } as model) =
     case msg of
         NewConn conn ->
-            ( { model | conns = conn :: model.conns }, Cmd.none )
+            let
+                offConns =
+                    (List.map (\( conn, form ) -> ( { conn | displayForm = False }, form )) conns)
+
+                newTuple =
+                    ( conn, initConnForm (Just (connToForm conn)) )
+
+                newConns =
+                    offConns ++ [ newTuple ]
+            in
+                ( { model | conns = newConns }, Cmd.none )
+
+        ConnFormMsg order formMsg ->
+            let
+                newConns =
+                    List.map (updateForm order formMsg) conns
+            in
+                ( { model | conns = newConns }, Cmd.none )
 
         _ ->
             ( model, Cmd.none )
+
+
+updateForm order formMsg (( conn, form ) as connTuple) =
+    case formMsg of
+        Form.Submit ->
+            if conn.order == order then
+                let
+                    newForm =
+                        Form.update validation formMsg form
+
+                    newConnForm =
+                        (Form.getOutput newForm |> Maybe.withDefault (connToForm conn))
+
+                    getErr =
+                        Form.getErrors newForm
+                in
+                    ( formToConn newConnForm conn, newForm )
+            else
+                connTuple
+
+        evt ->
+            ( Debug.log (toString evt) conn, Form.update validation formMsg form )
 
 
 
@@ -61,7 +100,7 @@ subscriptions model =
 mainStyle : List ( String, String )
 mainStyle =
     [ ( "font-family", "Open Sans, sans-serif" )
-    , ( "background-color", "#3E4047" )
+    , ( "background-color", bgColor )
     , ( "height", "100%" )
     ]
 
@@ -69,6 +108,6 @@ mainStyle =
 view : Model -> Html.Html Msg
 view model =
     div [ style mainStyle ]
-        [ renderHeader
-        , renderList model.conns
+        [ renderHeader model
+        , renderList model
         ]

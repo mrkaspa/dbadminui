@@ -5,10 +5,12 @@ import Main.Types exposing (Msg(..), Conn)
 import Html.Events exposing (onClick)
 import InlineHover exposing (hover)
 import Html.Attributes exposing (..)
+import Main.Types exposing (Model)
+import Main.CommonStyles exposing (mainColor, secondaryColor, bgColor)
 
 
-renderHeader : Html.Html Msg
-renderHeader =
+renderHeader : Model -> Html.Html Msg
+renderHeader { conns } =
     div [ style headerStyle ]
         [ div [ style innerStyle ]
             [ div [ style textStyle ]
@@ -19,7 +21,7 @@ renderHeader =
                 , hover buttonHoverStyle a [ style buttonStyle, href "#" ] [ text "Activate" ]
                 ]
             , div [ style divStyle ]
-                [ hover buttonHoverStyle a [ style buttonStyle, href "#", onClick (NewConn (Conn 0 "")) ] [ text "New Connection" ]
+                [ hover buttonHoverStyle a [ style buttonStyle, href "#", onClick (NewConn (Conn (List.length conns) "This is new" True)) ] [ text "New Connection" ]
                 ]
             ]
         ]
@@ -27,7 +29,7 @@ renderHeader =
 
 headerStyle : List ( String, String )
 headerStyle =
-    [ ( "border", "4px solid #FFBB0F" )
+    [ ( "border", "4px solid " ++ mainColor )
     , ( "padding", "10px" )
     , ( "display", "flex" )
     , ( "justify-content", "flex-end" )
@@ -53,7 +55,7 @@ divStyle =
 
 textStyle : List ( String, String )
 textStyle =
-    [ ( "color", "#FFBB0F" )
+    [ ( "color", mainColor )
     , ( "text-align", "center" )
     , ( "font-size", "1.5em" )
     ]
@@ -61,11 +63,11 @@ textStyle =
 
 buttonStyle : List ( String, String )
 buttonStyle =
-    [ ( "border", "1px solid #FFBB0F" )
-    , ( "background-color", "#a38860" )
+    [ ( "border", "1px solid " ++ mainColor )
+    , ( "background-color", secondaryColor )
     , ( "text-decoration", "none" )
     , ( "border-radius", "2px" )
-    , ( "color", "#3E4047" )
+    , ( "color", bgColor )
     , ( "flex", "1" )
     , ( "padding", "5px" )
     , ( "margin", "5px" )
@@ -75,5 +77,5 @@ buttonStyle =
 
 buttonHoverStyle : List ( String, String )
 buttonHoverStyle =
-    [ ( "background-color", "#FFBB0F" )
+    [ ( "background-color", mainColor )
     ]
