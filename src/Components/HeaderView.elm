@@ -1,12 +1,12 @@
-module Main.HeaderView exposing (renderHeader)
+module Components.HeaderView exposing (renderHeader)
 
 import Html exposing (div, a, text)
-import Main.Types exposing (Msg(..), Conn)
+import Common.Types exposing (Msg(..), Conn)
 import Html.Events exposing (onClick)
 import InlineHover exposing (hover)
 import Html.Attributes exposing (..)
-import Main.Types exposing (Model)
-import Main.CommonStyles exposing (mainColor, secondaryColor, bgColor)
+import Common.Types exposing (Model)
+import Common.Styles exposing (mainColor, secondaryColor, bgColor)
 
 
 renderHeader : Model -> Html.Html Msg

@@ -1,10 +1,12 @@
-module Main.Types exposing (Conn, ConnForm, ConnTuple, Msg(..), Model, connToForm, formToConn)
+module Common.Types exposing (Conn, ConnForm, ConnTuple, Msg(..), Model, connToForm, formToConn)
 
 import Form exposing (Form)
+import Navigation
 
 
 type alias Model =
-    { conns : List ConnTuple
+    { current : Navigation.Location
+    , conns : List ConnTuple
     }
 
 
@@ -24,7 +26,8 @@ type alias ConnForm =
 
 
 type Msg
-    = NewConn Conn
+    = UrlChange Navigation.Location
+    | NewConn Conn
     | Update Conn
     | Delete Conn
     | ListConn

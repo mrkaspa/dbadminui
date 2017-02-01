@@ -1,9 +1,9 @@
-module Main.ListView exposing (renderList)
+module Components.ListView exposing (renderList)
 
 import Html exposing (div, button, text, h2, input, ul, li)
-import Main.Types exposing (Conn, ConnTuple, Msg(..), Model)
+import Common.Types exposing (Conn, ConnTuple, Msg(..), Model)
 import Form exposing (Form)
-import Main.ConnForm exposing (connFormView)
+import Components.ConnForm exposing (connFormView)
 
 
 renderList : Model -> Html.Html Msg

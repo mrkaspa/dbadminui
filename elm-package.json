@@ -5,12 +5,15 @@
     "license": "BSD3",
     "source-directories": [
         "./src",
-        "./src/main"
+        "./src/Common",
+        "./src/Components",
+        "./src/Reducers"
     ],
     "exposed-modules": [],
     "dependencies": {
         "elm-lang/core": "5.0.0 <= v < 6.0.0",
         "elm-lang/html": "2.0.0 <= v < 3.0.0",
+        "elm-lang/navigation": "2.1.0 <= v < 3.0.0",
         "etaque/elm-form": "1.0.0 < v <= 2.0.0",
         "jinjor/elm-inline-hover": "1.0.2 <= v < 2.0.0"
     },

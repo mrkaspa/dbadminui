@@ -1,9 +1,9 @@
-module Main.ConnForm exposing (connFormView, initConnForm, validation)
+module Components.ConnForm exposing (connFormView, initConnForm, validation)
 
 import Html exposing (text, div, label, button)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
-import Main.Types exposing (Msg(..), Conn, ConnForm)
+import Common.Types exposing (Msg(..), Conn, ConnForm)
 import Form exposing (Form)
 import Form.Validate as Validate
 import Form.Input as Input

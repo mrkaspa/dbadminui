@@ -1,4 +1,4 @@
-module Main.CommonStyles exposing (..)
+module Common.Styles exposing (..)
 
 
 mainColor : String
