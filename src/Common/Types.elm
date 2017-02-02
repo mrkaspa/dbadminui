@@ -16,13 +16,24 @@ type alias ConnTuple =
 
 type alias Conn =
     { order : Int
-    , name : String
     , displayForm : Bool
+    , name : String
+    , host : String
+    , portNumber : Int
+    , user : String
+    , pass : String
+    , database : String
     }
 
 
 type alias ConnForm =
-    { name : String }
+    { name : String
+    , host : String
+    , portNumber : Int
+    , user : String
+    , pass : String
+    , database : String
+    }
 
 
 type Msg
@@ -36,9 +47,9 @@ type Msg
 
 connToForm : Conn -> ConnForm
 connToForm conn =
-    ConnForm conn.name
+    ConnForm conn.name conn.host conn.portNumber conn.user conn.pass conn.database
 
 
 formToConn : ConnForm -> Conn -> Conn
 formToConn connForm conn =
-    { conn | name = connForm.name }
+    { conn | name = connForm.name, host = connForm.host, portNumber = connForm.portNumber, user = connForm.user, pass = connForm.pass, database = connForm.database }

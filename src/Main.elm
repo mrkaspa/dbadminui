@@ -20,6 +20,9 @@ main =
 view : Model -> Html.Html Msg
 view ({ current } as model) =
     case current.pathname of
+        "/" ->
+            renderConnMain model
+
         "/src/Main.elm" ->
             renderConnMain model
 

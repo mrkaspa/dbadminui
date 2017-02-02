@@ -1,7 +1,7 @@
 module Components.HeaderView exposing (renderHeader)
 
 import Html exposing (div, a, text)
-import Common.Types exposing (Msg(..), Conn)
+import Common.Types exposing (Msg(..), Conn, ConnTuple)
 import Html.Events exposing (onClick)
 import InlineHover exposing (hover)
 import Html.Attributes exposing (..)
@@ -21,10 +21,15 @@ renderHeader { conns } =
                 , hover buttonHoverStyle a [ style buttonStyle, href "#" ] [ text "Activate" ]
                 ]
             , div [ style divStyle ]
-                [ hover buttonHoverStyle a [ style buttonStyle, href "#", onClick (NewConn (Conn (List.length conns) "This is new" True)) ] [ text "New Connection" ]
+                [ hover buttonHoverStyle a [ style buttonStyle, href "#", onClick (NewConn (newConn conns)) ] [ text "New Connection" ]
                 ]
             ]
         ]
+
+
+newConn : List ConnTuple -> Conn
+newConn conns =
+    Conn ((List.length conns) + 1) True "This is new" "localhost" 9090 "" "" ""
 
 
 headerStyle : List ( String, String )

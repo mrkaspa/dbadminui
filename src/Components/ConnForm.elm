@@ -28,31 +28,63 @@ initConnForm mayConn =
 connFormView : Form () ConnForm -> Html.Html Form.Msg
 connFormView form =
     let
-        -- error presenter
-        errorFor field =
-            case field.liveError of
-                Just error ->
-                    -- replace toString with your own translations
-                    div [ class "error" ] [ text (toString error) ]
-
-                Nothing ->
-                    text ""
-
-        -- fields states
         name =
             Form.getFieldAsString "name" form
+
+        host =
+            Form.getFieldAsString "host" form
+
+        portNumber =
+            Form.getFieldAsString "portNumber" form
+
+        user =
+            Form.getFieldAsString "user" form
+
+        pass =
+            Form.getFieldAsString "pass" form
+
+        database =
+            Form.getFieldAsString "database" form
     in
         div []
-            [ label [] [ text "Name" ]
-            , Input.textInput name []
-            , errorFor name
+            [ textField name "Name"
+            , textField host "Host"
+            , textField portNumber "Port"
+            , textField user "Username"
+            , textField pass "Password"
+            , textField database "Database"
             , button
                 [ onClick Form.Submit ]
                 [ text "Submit" ]
             ]
 
 
+errorFor : Form.FieldState () String -> Html.Html Form.Msg
+errorFor field =
+    case field.liveError of
+        Just error ->
+            -- replace toString with your own translations
+            div [ class "error" ] [ text (toString error) ]
+
+        Nothing ->
+            text ""
+
+
+textField : Form.FieldState () String -> String -> Html.Html Form.Msg
+textField field labelName =
+    div []
+        [ label [] [ text labelName ]
+        , Input.textInput field []
+        , errorFor field
+        ]
+
+
 validation : Validate.Validation () ConnForm
 validation =
-    Validate.map ConnForm
+    Validate.map6 ConnForm
         (Validate.field "name" Validate.string)
+        (Validate.field "host" Validate.string)
+        (Validate.field "portNumber" Validate.int)
+        (Validate.field "user" Validate.string)
+        (Validate.field "pass" Validate.string)
+        (Validate.field "database" Validate.string)
