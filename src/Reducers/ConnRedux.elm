@@ -24,6 +24,14 @@ update msg conns =
         ConnFormMsg order formMsg ->
             List.map (updateForm order formMsg) conns
 
+        ConnSaved result ->
+            case result of
+                Ok conn ->
+                    conns
+
+                Err _ ->
+                    conns
+
         _ ->
             conns
 

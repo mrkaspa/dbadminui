@@ -29,7 +29,7 @@ renderHeader { conns } =
 
 newConn : List ConnTuple -> Conn
 newConn conns =
-    Conn ((List.length conns) + 1) True "This is new" "localhost" 9090 "" "" ""
+    Conn ((List.length conns) + 1) True -1 "This is new" "localhost" 9090 "" "" ""
 
 
 headerStyle : List ( String, String )
