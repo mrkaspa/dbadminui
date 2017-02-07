@@ -3,6 +3,7 @@ module Reducers.ConnRedux exposing (update)
 import Common.Types exposing (Conn, ConnForm, ConnTuple, Msg(..), Model, connToForm, formToConn)
 import Form
 import Components.ConnForm exposing (initConnForm, validation)
+import Http exposing (Error(..))
 
 
 update : Msg -> List ConnTuple -> List ConnTuple
@@ -26,7 +27,22 @@ update msg conns =
 
         ConnSaved result ->
             case result of
-                Ok conn ->
+                Ok connSaved ->
+                    let
+                        newConn =
+                            { connSaved | displayForm = False }
+                    in
+                        List.map
+                            (\( conn, form ) ->
+                                if conn.order == connSaved.order then
+                                    ( connSaved, form )
+                                else
+                                    ( conn, form )
+                            )
+                            conns
+
+                -- TODO we go here
+                Err (BadStatus resp) ->
                     conns
 
                 Err _ ->
@@ -36,6 +52,7 @@ update msg conns =
             conns
 
 
+updateForm : Int -> Form.Msg -> ConnTuple -> ConnTuple
 updateForm order formMsg (( conn, form ) as connTuple) =
     case formMsg of
         Form.Submit ->

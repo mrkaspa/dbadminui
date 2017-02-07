@@ -2,7 +2,7 @@
 // code. You can also put them in separate files and require them here.
 
 
-require('./index.html');
-var Elm = require('./Main');
+	require('./index.html');
+	var Elm = require('./Main');
 
-var elm = Elm.Main.fullscreen();
+	var elm = Elm.Main.fullscreen();

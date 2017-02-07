@@ -1,6 +1,6 @@
 module Reducers.CmdRedux exposing (update)
 
-import Common.Types exposing (Msg(..), Model)
+import Common.Types exposing (Msg(..), Model, Conn, ConnTuple)
 import Reducers.SaveConnSaga exposing (saveConn)
 
 

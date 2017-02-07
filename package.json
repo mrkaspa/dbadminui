@@ -8,11 +8,10 @@
   "license": "ISC",
   "scripts": {
     "dev": "electron main.js",
-    "server": "webpack-dev-server --hot --inline --port 3000",
-    "build": "webpack",
+    "server": "gulp & webpack-dev-server --hot --inline --port 3000",
+    "build": "npm run prepackage && build --x64",
     "prepackage": "cross-env NODE_ENV=production webpack",
     "package": "npm run prepackage && build --dir",
-    "build": "npm run prepackage && build --x64",
     "build-mac": "npm run prepackage && build --mac --x64",
     "build-win": "npm run prepackage && build --win --x64",
     "build-linux": "npm run prepackage && build --linux --x64",
@@ -50,16 +49,18 @@
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.8",
     "copy-webpack-plugin": "^1.1.1",
+    "cross-env": "^2.0.0",
+    "electron-builder": "^7.13.0",
+    "electron-debug": "^1.0.1",
+    "electron-devtools-installer": "^2.0.1",
+    "electron-prebuilt": "^1.2.0",
     "elm-hot-loader": "^0.5.4",
     "elm-webpack-loader": "^4.1.1",
     "file-loader": "^0.8.5",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.12",
-    "webpack-dev-server": "^1.14.1",
-    "cross-env": "^2.0.0",
-    "electron-prebuilt": "^1.2.0",
-    "electron-builder": "^7.13.0",
-    "electron-debug": "^1.0.1",
-    "electron-devtools-installer": "^2.0.1"
+    "webpack-dev-server": "^1.14.1"
   }
 }

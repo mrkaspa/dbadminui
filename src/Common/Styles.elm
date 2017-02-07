@@ -3,14 +3,14 @@ module Common.Styles exposing (..)
 
 mainColor : String
 mainColor =
-    "#FFBB0F"
+    "#FF9E00"
 
 
 secondaryColor : String
 secondaryColor =
-    "#a38860"
+    "#554329"
 
 
 bgColor : String
 bgColor =
-    "#3E4047"
+    "#2B2F36"

@@ -38,6 +38,7 @@ headerStyle =
     , ( "padding", "10px" )
     , ( "display", "flex" )
     , ( "justify-content", "flex-end" )
+    , ( "-webkit-app-region", "drag" )
     ]
 
 
@@ -72,15 +73,17 @@ buttonStyle =
     , ( "background-color", secondaryColor )
     , ( "text-decoration", "none" )
     , ( "border-radius", "2px" )
-    , ( "color", bgColor )
+    , ( "color", mainColor )
     , ( "flex", "1" )
     , ( "padding", "5px" )
     , ( "margin", "5px" )
     , ( "text-align", "center" )
+    , ( "-webkit-app-region", "no-drag" )
     ]
 
 
 buttonHoverStyle : List ( String, String )
 buttonHoverStyle =
     [ ( "background-color", mainColor )
+    , ( "color", bgColor )
     ]
