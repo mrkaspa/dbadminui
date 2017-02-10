@@ -1,0 +1,38 @@
+.header
+  border: 4px solid  $main-color
+  padding: 10px
+  display: flex
+  justify-content: flex-end
+  -webkit-app-region: drag
+
+  & > div
+    flex-direction: column
+    display: flex
+    justify-content: flex-end
+    flex: 0.5
+
+    .textContainer
+      color: $main-color
+      text-align: center
+      font-size: 1.5em
+
+    .buttonContainer
+      justify-content: space-between
+      display: flex
+      margin: 5px
+
+      a
+        border: 1px solid $main-color
+        background-color: $secondary-color
+        color: $main-color
+        text-decoration: none
+        border-radius: 2px
+        flex: 1
+        padding: 5px
+        margin: 5px
+        text-align: center
+        -webkit-app-region: no-drag
+
+      a:hover
+        background-color: $main-color
+        color: $bg-color
